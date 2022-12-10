@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 public class BallController : MonoBehaviour
 {
     [SerializeField] LineRenderer lineRenderer;
+    [SerializeField] LayerMask rayCollisionMask;
+
 
     [SerializeField] float lineLlength = 10f;
     [SerializeField] float shootPower = 1f;
@@ -37,7 +39,6 @@ public class BallController : MonoBehaviour
     {
         if (!isActive) return;
 
-        DrawLine();
 
         if (currentState == states.idle && Touchscreen.current.press.isPressed)
         {
@@ -54,8 +55,8 @@ public class BallController : MonoBehaviour
         {
             StopIfItsSlowDown();
         }
-        Debug.Log("vmgn: "+ theRb.velocity.magnitude);
-
+        //Debug.Log("vmgn: "+ theRb.velocity.magnitude);
+        
     }
 
     void DrawLine()
@@ -79,6 +80,8 @@ public class BallController : MonoBehaviour
 
         lineRenderer.SetPositions(positions);
         lineRenderer.enabled = true;
+
+
     }
 
     void ShootIfFingerUp()
@@ -88,7 +91,7 @@ public class BallController : MonoBehaviour
 
             Debug.Log("shoot");
 
-            theRb.AddForce(linePos * shootPower, ForceMode.VelocityChange);
+            theRb.AddForce(linePos * shootPower, ForceMode.Impulse);
             lineRenderer.enabled = false;
 
             currentState = states.moving;

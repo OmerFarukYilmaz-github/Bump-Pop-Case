@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 545217370}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.20257187, y: 0.6604272, z: 10.680351}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9166913283839644141}
@@ -52,7 +52,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 89ffc499d79fd784ebcc23b686a03b38, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -72,7 +72,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
@@ -84,7 +84,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.5858612
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -130,7 +130,7 @@ LineRenderer:
     shadowBias: 0.5
     generateLightingData: 0
   m_UseWorldSpace: 1
-  m_Loop: 1
+  m_Loop: 0
 --- !u!1001 &8700341422029485574
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -259,10 +259,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 545217372}
+  rayCollisionMask:
+    serializedVersion: 2
+    m_Bits: 2147483647
   lineLlength: 10
   shootPower: 2
   stopVelocity: 0.2
-  isActive: 0
+  isActive: 1
 --- !u!4 &9166913283839644141 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ab57e61e26570254f8676e02f92676f5, type: 3}
