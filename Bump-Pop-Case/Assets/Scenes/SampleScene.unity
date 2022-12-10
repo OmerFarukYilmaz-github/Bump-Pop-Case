@@ -500,7 +500,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.62
+  m_Radius: 1.28
   m_Center: {x: -0.00000020861626, y: -0.00000029802322, z: 0.00000020861626}
 --- !u!114 &1010096196
 MonoBehaviour:
@@ -524,10 +524,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 545217372, guid: 9e03752a14dbd2a4f9b2d089e3e09d49, type: 3}
-      propertyPath: m_Parameters.alignment
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 545217372, guid: 9e03752a14dbd2a4f9b2d089e3e09d49, type: 3}
       propertyPath: m_Parameters.textureMode
       value: 1
       objectReference: {fileID: 0}
@@ -535,45 +531,13 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 89ffc499d79fd784ebcc23b686a03b38, type: 2}
-    - target: {fileID: 545217372, guid: 9e03752a14dbd2a4f9b2d089e3e09d49, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 545217372, guid: 9e03752a14dbd2a4f9b2d089e3e09d49, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 545217372, guid: 9e03752a14dbd2a4f9b2d089e3e09d49, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 545217372, guid: 9e03752a14dbd2a4f9b2d089e3e09d49, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 545217372, guid: 9e03752a14dbd2a4f9b2d089e3e09d49, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 545217372, guid: 9e03752a14dbd2a4f9b2d089e3e09d49, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 791513324, guid: 9e03752a14dbd2a4f9b2d089e3e09d49, type: 3}
       propertyPath: isActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 791513324, guid: 9e03752a14dbd2a4f9b2d089e3e09d49, type: 3}
-      propertyPath: shootPower
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8393790224469199703, guid: 9e03752a14dbd2a4f9b2d089e3e09d49, type: 3}
       propertyPath: m_Name
       value: Pre_Ball
-      objectReference: {fileID: 0}
-    - target: {fileID: 8393790224469199703, guid: 9e03752a14dbd2a4f9b2d089e3e09d49, type: 3}
-      propertyPath: m_TagString
-      value: Ball
       objectReference: {fileID: 0}
     - target: {fileID: 9166913283839644141, guid: 9e03752a14dbd2a4f9b2d089e3e09d49, type: 3}
       propertyPath: m_RootOrder

@@ -37,6 +37,8 @@ public class BallController : MonoBehaviour
     {
         if (!isActive) return;
 
+        DrawLine();
+
         if (currentState == states.idle && Touchscreen.current.press.isPressed)
         {
             currentState = states.aiming;
