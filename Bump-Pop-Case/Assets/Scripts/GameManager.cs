@@ -5,8 +5,7 @@ using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] GameObject preGameUI;
-
+   
 
     // Start is called before the first frame update
     void Start()
@@ -17,10 +16,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Touchscreen.current.press.isPressed && preGameUI.activeSelf == true)
-        {
-            preGameUI.SetActive(false);
-        }  
+       
     }
 
 }

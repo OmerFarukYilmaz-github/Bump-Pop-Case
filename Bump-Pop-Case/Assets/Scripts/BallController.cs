@@ -24,13 +24,15 @@ public class BallController : MonoBehaviour
         moving,
         idle
     };
-
     states currentState;
+
+    UIManager uIManager;
 
     public void Start()
     {
         currentState = states.idle;
         theRb = GetComponent<Rigidbody>();
+        uIManager = FindObjectOfType<UIManager>();
     }
 
 
@@ -40,11 +42,10 @@ public class BallController : MonoBehaviour
         if (!isActive) return;
 
 
-        if (currentState == states.idle && Touchscreen.current.press.isPressed)
+        if (currentState == states.idle && Touchscreen.current.press.isPressed && uIManager.IsGameAreaTouched())
         {
             currentState = states.aiming;
-            Debug.Log("aiming");
-
+           //Debug.Log("aiming");
         }
         else if(currentState == states.aiming && theRb.velocity.magnitude <= stopVelocity)
         {
@@ -89,13 +90,13 @@ public class BallController : MonoBehaviour
         if (!Touchscreen.current.press.isPressed)
         {
 
-            Debug.Log("shoot");
+           // Debug.Log("shoot");
 
-            theRb.AddForce(linePos * shootPower, ForceMode.Impulse);
+            theRb.AddForce(linePos * shootPower , ForceMode.Impulse);
             lineRenderer.enabled = false;
 
             currentState = states.moving;
-            Debug.Log("moving");
+           // Debug.Log("moving");
 
         }
     }
@@ -108,7 +109,7 @@ public class BallController : MonoBehaviour
             theRb.angularVelocity = Vector3.zero;
 
             currentState = states.idle;
-            Debug.Log("ýdle");
+            //Debug.Log("ýdle");
         }
     }
 
