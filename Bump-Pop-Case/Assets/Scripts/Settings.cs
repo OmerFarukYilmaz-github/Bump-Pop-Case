@@ -7,6 +7,10 @@ public class Settings : MonoBehaviour
 {
     [SerializeField] GameObject settingButton;
     [SerializeField] GameObject settingsPanel;
+    public void Start()
+    {
+        SetVisibility(false);
+    }
 
     public void OnOffSettingsPanel()
     {
@@ -25,5 +29,17 @@ public class Settings : MonoBehaviour
         settingButton.SetActive(!isPanelVisible);
         settingsPanel.SetActive(isPanelVisible);
     }
+   
+    /*
+    public void OnOffSound(bool isMute)
+    {
+
+    }
+    public void OnOffVibration(bool isVibratingOn)
+    {
+
+    }
+    */
+
 
 }

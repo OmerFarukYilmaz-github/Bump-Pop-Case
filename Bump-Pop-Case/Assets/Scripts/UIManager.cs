@@ -67,12 +67,12 @@ public class UIManager : MonoBehaviour
     {
         if (EventSystem.current.currentSelectedGameObject != null && EventSystem.current.currentSelectedGameObject.GetComponent<CanvasRenderer>() != null)
         {
-            Debug.Log("touch over GUI element!");
+           // Debug.Log("touch over GUI element!");
             return false;
         }
         else
         {
-            Debug.Log("touch on gameplay area ");
+            //Debug.Log("touch on gameplay area ");
             return true;
         }
     }
