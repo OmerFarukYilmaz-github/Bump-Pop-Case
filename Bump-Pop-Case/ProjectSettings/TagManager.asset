@@ -7,6 +7,8 @@ TagManager:
   - Ball
   - Cloner
   - Road
+  - End
+  - Lava
   layers:
   - Default
   - TransparentFX

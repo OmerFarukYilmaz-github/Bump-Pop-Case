@@ -204,7 +204,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 34426a60aa2506449abd63e93dd4e098, type: 2}
     - target: {fileID: 919132149155446097, guid: ab57e61e26570254f8676e02f92676f5, type: 3}
       propertyPath: m_Name
-      value: Pre_Ball
+      value: Pre_Ball Green
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ab57e61e26570254f8676e02f92676f5, type: 3}
       propertyPath: m_TagString
@@ -232,7 +232,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!135 &791513326
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -259,13 +259,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 545217372}
-  rayCollisionMask:
-    serializedVersion: 2
-    m_Bits: 2147483647
-  lineLlength: 10
+  lineLength: 10
   shootPower: 2
   stopVelocity: 0.2
-  isActive: 1
+  isActive: 0
 --- !u!4 &9166913283839644141 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ab57e61e26570254f8676e02f92676f5, type: 3}

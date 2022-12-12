@@ -7,7 +7,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
- 
+
+    public int shootCount = 3;
+    public float income = 0f;
+
+
     public void Awake()
     {
         instance = this;
@@ -23,15 +27,13 @@ public class GameManager : MonoBehaviour
 
     }
 
+
     // Start is called before the first frame update
     void Start()
     {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(DatabaseManager.instance.GetLevelName());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-       
-    }
+
 
 }

@@ -5,11 +5,17 @@ using UnityEngine;
 public class Cloner : MonoBehaviour
 {
     [SerializeField] GameObject ballPrefab;
+    UIManager uiManager;
 
+    public void Start()
+    {
+        uiManager = FindObjectOfType<UIManager>();
+    }
     public void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Ball")
         {
+            Debug.Log("CLONERa girdik");
             StartCoroutine(CloneBalls());
         }
     }
@@ -28,9 +34,9 @@ public class Cloner : MonoBehaviour
                                                                 transform.position.y,
                                                                 Random.Range(-360f, 360f)) * 4f);
 
-            UIManager.instance.AdjustMoney(DatabaseManager.instance.GetIncomePerBall());
-            UIManager.instance.AdjustBallCount(1);
-
+            uiManager.AdjustMoney(DatabaseManager.instance.GetIncomePerBall());
+            GameManager.instance.income += DatabaseManager.instance.GetIncomePerBall();
+            uiManager.AdjustBallCount(1);
         }
        
 

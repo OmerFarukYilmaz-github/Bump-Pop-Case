@@ -11,10 +11,13 @@ public class BallController : MonoBehaviour
     [SerializeField] float lineLength = 10f;
     [SerializeField] float shootPower = 1f;
     [SerializeField] float stopVelocity = 0.5f;
-    [SerializeField] bool isActive = false;
+    public bool isActive = false;
 
-    Rigidbody theRb;
-   public Vector3 linePos;
+     Rigidbody theRb;
+    CameraController cameraController;
+     Vector3 targetPoint;
+    GameOver gameOver;
+
 
     bool isFirstTouch = true;
     Vector3 firstTouchPos;
@@ -38,9 +41,10 @@ public class BallController : MonoBehaviour
         currentState = states.idle;
         theRb = GetComponent<Rigidbody>();
         uIManager = FindObjectOfType<UIManager>();
+        cameraController = FindObjectOfType<CameraController>();
+        gameOver = FindObjectOfType<GameOver>();
 
-        LinePosBeforeShoot();
-        
+        AlignTargetPosBeforeShoot();
     }
 
 
@@ -51,7 +55,7 @@ public class BallController : MonoBehaviour
         if (!isActive) return;  
         // oyun alanýna dokunmadýysa calisma
         if (Touchscreen.current.press.isPressed && !uIManager.IsGameAreaTouched()) return;
-
+        if (gameOver.isGameOver) return;
 
         if (Touchscreen.current.press.isPressed && isFirstTouch)
         {
@@ -59,7 +63,6 @@ public class BallController : MonoBehaviour
             firstTouchPos = Touchscreen.current.primaryTouch.position.ReadValue();
             //Debug.Log("ilk týklama "+ firstTouchPos);
         }
-
 
 
         if (Touchscreen.current.press.isPressed && currentState == states.idle && !isFirstTouch)
@@ -71,7 +74,7 @@ public class BallController : MonoBehaviour
         else if(currentState == states.aiming && theRb.velocity.magnitude <= stopVelocity && !isFirstTouch)
         {
             //Debug.Log("aiming");
-            RotateAimToDirection();
+            RotateTargetDirection();
             ShootIfFingerUp();
         }
         else if (currentState == states.moving)
@@ -89,7 +92,7 @@ public class BallController : MonoBehaviour
         {
             //Debug.Log("shoot");
             
-            theRb.AddForce(linePos * shootPower, ForceMode.Impulse);
+            theRb.AddForce(targetPoint * shootPower, ForceMode.Impulse);
             
             lineRenderer.enabled = false;
             currentState = states.moving;
@@ -107,18 +110,20 @@ public class BallController : MonoBehaviour
             theRb.angularVelocity = Vector3.zero;
 
             isFirstTouch = true;
-            LinePosBeforeShoot();
+            AlignTargetPosBeforeShoot();
 
             currentState = states.idle;
             //Debug.Log("moving den ýdle a gec");
+
+
         }
     }
-    void LinePosBeforeShoot()
+    void AlignTargetPosBeforeShoot()
     {
-        linePos = new Vector3(0f, transform.position.y, z * lineLength);
+        targetPoint = new Vector3(0f, transform.position.y -0.5f, z * lineLength);
     }
 
-    void RotateAimToDirection()
+    void RotateTargetDirection()
     {
         touchPos = Touchscreen.current.primaryTouch.position.ReadValue();
         float deltaX;
@@ -146,12 +151,12 @@ public class BallController : MonoBehaviour
         if (isClockWiseRotation)
         {
             //Debug.Log("clockWise");
-            linePos = Quaternion.Euler(0f, 20f * Mathf.Abs(deltaX) * Time.deltaTime, 0f) * linePos;
+            targetPoint = Quaternion.Euler(0f, 20f * Mathf.Abs(deltaX) * Time.deltaTime, 0f) * targetPoint;
         }
         else
         {
              //Debug.Log("Anti clockWise");
-            linePos = Quaternion.Euler(0f, -20f * Mathf.Abs(deltaX) * Time.deltaTime, 0f) * linePos;
+            targetPoint = Quaternion.Euler(0f, -20f * Mathf.Abs(deltaX) * Time.deltaTime, 0f) * targetPoint;
         }
 
         Vector3[] positions = 
@@ -159,9 +164,9 @@ public class BallController : MonoBehaviour
             transform.position, 
             new Vector3
             (
-                linePos.x + transform.position.x,
+                targetPoint.x + transform.position.x ,
                 transform.position.y, 
-                linePos.z + transform.position.z
+                targetPoint.z + transform.position.z 
             ) 
         };
 

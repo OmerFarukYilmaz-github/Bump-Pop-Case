@@ -44,6 +44,7 @@ public class test : MonoBehaviour
         }
 
 
+
     }
     /*
       KOORTINAT DUZLEM BOLGELER

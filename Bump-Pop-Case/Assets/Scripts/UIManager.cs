@@ -14,33 +14,17 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI moneyTxt;
     [SerializeField] TextMeshProUGUI ballCountTxt;
 
-    public static UIManager instance;
 
     float _money;
     int _ballCount;
     string _levelName;
 
-    public void Awake()
-    {
-        instance = this;
-        int countUiManager = FindObjectsOfType<UIManager>().Length;
-        if (countUiManager > 1)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            DontDestroyOnLoad(gameObject);
-        }
-
-    }
 
 
     // Start is called before the first frame update
     void Start()
     {
         SetVisibilityOfUI( true, false );
-        ShowLevelName(DatabaseManager.instance.GetLevelName());
         AdjustMoney(DatabaseManager.instance.GetMoneyAmount());
         AdjustBallCount(1);
         _money = DatabaseManager.instance.GetMoneyAmount();
@@ -77,11 +61,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void ShowLevelName(string levelName)
-    {
-        levelNameTxt.text = levelName;
-    }
-
     public void AdjustMoney(float money)
     {
         _money += money;
@@ -91,8 +70,13 @@ public class UIManager : MonoBehaviour
 
     public void AdjustBallCount(int ballCount)
     {
-        _ballCount += ballCount;
-        ballCountTxt.text = _ballCount.ToString();
+        this._ballCount += ballCount;
+        ballCountTxt.text = this._ballCount.ToString();
+    }
+    public void ResetBallCount()
+    {
+        this._ballCount = 1;
+        ballCountTxt.text = this._ballCount.ToString();
     }
 
 }
