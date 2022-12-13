@@ -13,9 +13,11 @@ public class UpgradeManager : MonoBehaviour
 
     public void Start()
     {
+        //income upgrade butonunun ustundeki level yazýsý ve mailyet
         incomeLevelText.text = DatabaseManager.instance.GetIncomeLevelName();
         incomeCostText.text = DatabaseManager.instance.GetIncomeUpgradeCost().ToString();
 
+        // klonlanacak top sayýsý upgrade butonunun ustundeki level yazýsý ve mailyet
         ballCloneCountLevelText.text = DatabaseManager.instance.GetBall2CloneLevelName();
         ballCloneCountCostText.text = DatabaseManager.instance.GetBall2CloneUpgradeCost().ToString();
     }
@@ -25,7 +27,9 @@ public class UpgradeManager : MonoBehaviour
         // paramýz varsa ve 20. levele, maxa ulasilmadiysa
         if (DatabaseManager.instance.GetMoneyAmount() < DatabaseManager.instance.GetIncomeUpgradeCost()
             || incomeLevelText.text == "LEVEL 20")
-        { return; }
+        { 
+            return; 
+        }
 
         // maliyet her seferinde %20 artsýn ve uý duzenlensin
         float newIncomePerBallCost = Mathf.RoundToInt(System.Convert.ToInt32(incomeCostText.text) * 1.4f);

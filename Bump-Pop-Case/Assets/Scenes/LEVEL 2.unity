@@ -1273,6 +1273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootCount: 3
+  income: 0
 --- !u!4 &393127954
 Transform:
   m_ObjectHideFlags: 0
@@ -2708,11 +2709,11 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: dd63b750d80081449ad73ee8dc03842e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 91ff3be1a217214408511e74092368b1, type: 2}
+      objectReference: {fileID: 2100000, guid: 086ed0fd97429a644969a3937c06cc7c, type: 2}
     - target: {fileID: -7511558181221131132, guid: dd63b750d80081449ad73ee8dc03842e, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: de30d88b63c91df4889501f85e22f8bd, type: 2}
+      objectReference: {fileID: 2100000, guid: fa758bac3088b84498101ed3191444db, type: 2}
     - target: {fileID: -7511558181221131132, guid: dd63b750d80081449ad73ee8dc03842e, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 

@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 4573066}
   m_Layer: 5
   m_Name: Lose Panel
-  m_TagString: Untagged
+  m_TagString: losePanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -727,7 +727,6 @@ GameObject:
   m_Component:
   - component: {fileID: 206606651}
   - component: {fileID: 206606650}
-  - component: {fileID: 206606652}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: Untagged
@@ -789,19 +788,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &206606652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 206606649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25dc2be81d98b0d47b7c573c83762e56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 11122150}
 --- !u!1 &285021464
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,7 +801,7 @@ GameObject:
   - component: {fileID: 285021466}
   m_Layer: 5
   m_Name: Win Panel
-  m_TagString: Untagged
+  m_TagString: winPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1272,7 +1258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2295f43dff0b4d440998f59a02d2ea5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootCount: 3
+  incomeInCurrentPlay: 0
+  lastShootPos: {x: 0, y: 0, z: 0}
 --- !u!4 &393127954
 Transform:
   m_ObjectHideFlags: 0
@@ -4328,6 +4315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   winPanel: {fileID: 285021464}
   losePanel: {fileID: 4573064}
+  ballPrefab: {fileID: 8393790224469199703, guid: 9e03752a14dbd2a4f9b2d089e3e09d49, type: 3}
   isGameOver: 0
 --- !u!1 &1989705038
 GameObject:
@@ -4823,34 +4811,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 791513324, guid: 9e03752a14dbd2a4f9b2d089e3e09d49, type: 3}
-      propertyPath: isActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 791513324, guid: 9e03752a14dbd2a4f9b2d089e3e09d49, type: 3}
-      propertyPath: lineLength
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 791513324, guid: 9e03752a14dbd2a4f9b2d089e3e09d49, type: 3}
-      propertyPath: shootPower
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 791513324, guid: 9e03752a14dbd2a4f9b2d089e3e09d49, type: 3}
-      propertyPath: stopVelocity
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 791513324, guid: 9e03752a14dbd2a4f9b2d089e3e09d49, type: 3}
-      propertyPath: rayCollisionMask.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
-    - target: {fileID: 791513325, guid: 9e03752a14dbd2a4f9b2d089e3e09d49, type: 3}
-      propertyPath: m_Constraints
-      value: 112
-      objectReference: {fileID: 0}
-    - target: {fileID: 791513325, guid: 9e03752a14dbd2a4f9b2d089e3e09d49, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8393790224469199703, guid: 9e03752a14dbd2a4f9b2d089e3e09d49, type: 3}
       propertyPath: m_Name
       value: My_Ball

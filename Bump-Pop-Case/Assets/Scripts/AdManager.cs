@@ -4,13 +4,13 @@ using UnityEngine;
 using UnityEngine.Advertisements;
 using TMPro;
 
-public class RewardAdd : MonoBehaviour, IUnityAdsListener
+public class AdManager : MonoBehaviour, IUnityAdsListener
 {
     [SerializeField] bool isTestMode;
     [SerializeField] TextMeshProUGUI moneyTxt;
 
     public bool isReviveAd;
-    public static RewardAdd instance;
+    public static AdManager instance;
     private GameOver gameOver;
 
 #if UNITY_ANDROID
@@ -55,14 +55,14 @@ public class RewardAdd : MonoBehaviour, IUnityAdsListener
         switch (showResult)
         {
             case ShowResult.Finished:
-                Debug.LogWarning("Reklam bitti");
+               // Debug.LogWarning("Reklam bitti");
                 if (isReviveAd)
                 {
                     gameOver.Continue();
                 }
                 else
                 {
-                    DatabaseManager.instance.AdjustMoney(DatabaseManager.instance.GetMoneyAmount() + (GameManager.instance.income * 5f));
+                    DatabaseManager.instance.AdjustMoney(DatabaseManager.instance.GetMoneyAmount() + (GameManager.instance.incomeInCurrentPlay * 5f));
                 }
 
                 //Odul
@@ -83,7 +83,7 @@ public class RewardAdd : MonoBehaviour, IUnityAdsListener
 
     public void OnUnityAdsReady(string placementId)
     {
-        Debug.Log("Ad Ready");
+        //Debug.Log("Ad Ready");
     }
 
 }

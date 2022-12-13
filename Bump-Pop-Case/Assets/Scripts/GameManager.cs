@@ -7,10 +7,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-
-    public int shootCount = 3;
-    public float income = 0f;
-
+  //  public int shootCount = 3;
+    public float incomeInCurrentPlay = 0f;
+    public Vector3 lastShootPos;
 
     public void Awake()
     {
@@ -28,10 +27,18 @@ public class GameManager : MonoBehaviour
     }
 
 
-    // Start is called before the first frame update
+
     void Start()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(DatabaseManager.instance.GetLevelName());
+        //son kalininan leveli ac
+        try
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(DatabaseManager.instance.GetLevelName());
+        }
+        catch
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        }
     }
 
 

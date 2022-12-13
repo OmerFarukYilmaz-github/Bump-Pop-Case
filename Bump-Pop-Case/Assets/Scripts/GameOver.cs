@@ -8,6 +8,8 @@ public class GameOver : MonoBehaviour
 {
     [SerializeField] GameObject winPanel;
     [SerializeField] GameObject losePanel;
+    [SerializeField] GameObject ballPrefab;
+
     public bool isGameOver;
 
     UIManager uiManager;
@@ -32,26 +34,36 @@ public class GameOver : MonoBehaviour
 
     public void Continue()
     {
-        losePanel.SetActive(false);
-        //vurus hakkini arttir
+        // olmeden oncekþ son vurus noktasýný top spawnla
+        var ball = Instantiate(ballPrefab, GameManager.instance.lastShootPos, Quaternion.identity);
+        ball.GetComponent<BallController>().isActive = true;
         isGameOver = false;
+        
+        GameObject.FindGameObjectWithTag("losePanel").SetActive(false);
     }
 
     public void ShowAd(bool isReviveAd)
     {
-        RewardAdd.instance.ShowAd(isReviveAd);
+        AdManager.instance.ShowAd(isReviveAd);
     }
 
     public void NextLevel()
     {
+        
         string levelName = DatabaseManager.instance.GetLevelName();
-        int level =System.Convert.ToInt32(levelName.Replace("LEVEL ",""));
-
-        DatabaseManager.instance.SetLevelName("LEVEL "+ (level+1));
-
+        int level = System.Convert.ToInt32(levelName.Replace("LEVEL ",""));
         uiManager.ResetBallCount();
+        GameManager.instance.incomeInCurrentPlay = 0;
 
-        SceneManager.LoadScene("LEVEL " + (level + 1));
+        try
+        {
+            DatabaseManager.instance.SetLevelName("LEVEL " + (level + 1));
+            SceneManager.LoadScene("LEVEL " + (level + 1));
+        }
+        catch
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     public void RestartLevel()

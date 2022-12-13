@@ -6,6 +6,7 @@ public class Lava : MonoBehaviour
 {
     public void OnTriggerEnter(Collider other)
     {
+        // top lava duserse yok et, ana top duserse oyunun bitir
         if(other.tag=="Ball")
         {
             if (other.GetComponent<BallController>().isActive)
@@ -13,6 +14,7 @@ public class Lava : MonoBehaviour
                 GameOver gameOver = FindObjectOfType<GameOver>();
                 gameOver.Lose();
             }
+
             Destroy(other.gameObject);
 
         }

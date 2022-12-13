@@ -22,6 +22,7 @@ public class Cloner : MonoBehaviour
 
     IEnumerator CloneBalls()
     {
+        // direk klonlarsa ana topa carpýyorlar
         yield return new WaitForSecondsRealtime(0.1f);
 
         for (int i = 0; i < DatabaseManager.instance.GetBallCountToClon(); i++)
@@ -35,7 +36,7 @@ public class Cloner : MonoBehaviour
                                                                 Random.Range(-360f, 360f)) * 4f);
 
             uiManager.AdjustMoney(DatabaseManager.instance.GetIncomePerBall());
-            GameManager.instance.income += DatabaseManager.instance.GetIncomePerBall();
+            GameManager.instance.incomeInCurrentPlay += DatabaseManager.instance.GetIncomePerBall();
             uiManager.AdjustBallCount(1);
         }
        

@@ -9,6 +9,8 @@ TagManager:
   - Road
   - End
   - Lava
+  - winPanel
+  - losePanel
   layers:
   - Default
   - TransparentFX

@@ -6,22 +6,22 @@ using UnityEngine.InputSystem;
 
 public class BallController : MonoBehaviour
 {
+    #region Variables
+    
     [SerializeField] LineRenderer lineRenderer;
-
     [SerializeField] float lineLength = 10f;
     [SerializeField] float shootPower = 1f;
     [SerializeField] float stopVelocity = 0.5f;
     public bool isActive = false;
 
-     Rigidbody theRb;
-    CameraController cameraController;
-     Vector3 targetPoint;
+    Rigidbody theRb;
+    Vector3 targetPoint;
     GameOver gameOver;
-
+    UIManager uiManager;
 
     bool isFirstTouch = true;
     Vector3 firstTouchPos;
-    Vector3 touchPos;
+    Vector3 currentTouchPos;
     float z = 1f;
     float deltaOfXs = 0f;
     bool isClockWiseRotation;
@@ -34,44 +34,32 @@ public class BallController : MonoBehaviour
     };
     states currentState;
 
-    UIManager uIManager;
+    #endregion
 
     public void Start()
     {
         currentState = states.idle;
         theRb = GetComponent<Rigidbody>();
-        uIManager = FindObjectOfType<UIManager>();
-        cameraController = FindObjectOfType<CameraController>();
+        uiManager = FindObjectOfType<UIManager>();
         gameOver = FindObjectOfType<GameOver>();
-
         AlignTargetPosBeforeShoot();
+        GameManager.instance.lastShootPos = this.gameObject.transform.position;
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        //her top için calismasina gerek yok. bosa kaynak tuketmesin
-        if (!isActive) return;  
-        // oyun alanýna dokunmadýysa calisma
-        if (Touchscreen.current.press.isPressed && !uIManager.IsGameAreaTouched()) return;
-        if (gameOver.isGameOver) return;
+        DontRunRestOfCodeIfNotNecessary();
 
-        if (Touchscreen.current.press.isPressed && isFirstTouch)
-        {
-            isFirstTouch = false;
-            firstTouchPos = Touchscreen.current.primaryTouch.position.ReadValue();
-            //Debug.Log("ilk týklama "+ firstTouchPos);
-        }
-
+        CheckForFirstTouch();
 
         if (Touchscreen.current.press.isPressed && currentState == states.idle && !isFirstTouch)
         {
-           //RotateAimToDirection();
             currentState = states.aiming;
             //Debug.Log("idle dan aiming e gec");
         }
-        else if(currentState == states.aiming && theRb.velocity.magnitude <= stopVelocity && !isFirstTouch)
+        else if (currentState == states.aiming && theRb.velocity.magnitude <= stopVelocity && !isFirstTouch)
         {
             //Debug.Log("aiming");
             RotateTargetDirection();
@@ -82,16 +70,37 @@ public class BallController : MonoBehaviour
             StopIfItsSlowDown();
         }
         //Debug.Log("vmgn: "+ theRb.velocity.magnitude);
-        
+
     }
 
+    private void DontRunRestOfCodeIfNotNecessary()
+    {
+        //her top için calismasina gerek yok. bosa kaynak tuketmesin
+        if (!isActive) return;
+        // oyun alanýna dokunmadýysa calisma
+        if (Touchscreen.current.press.isPressed && !uiManager.IsGameAreaTouched()) return;
+        // oyun bitme ekranýysa calisma
+        if (gameOver.isGameOver) return;
+    }
+
+    private void CheckForFirstTouch()
+    {
+        // ilk dokunulan noktayý al. sonra dokunulan noktayla ilk nokta arasýndaki farka göre
+        // lineRenderer donecek
+        if (Touchscreen.current.press.isPressed && isFirstTouch)
+        {
+            isFirstTouch = false;
+            firstTouchPos = Touchscreen.current.primaryTouch.position.ReadValue();
+            //Debug.Log("ilk týklama "+ firstTouchPos);
+        }
+    }
 
     void ShootIfFingerUp()
     {
         if (!Touchscreen.current.press.isPressed)
         {
             //Debug.Log("shoot");
-            
+            GameManager.instance.lastShootPos = this.gameObject.transform.position;
             theRb.AddForce(targetPoint * shootPower, ForceMode.Impulse);
             
             lineRenderer.enabled = false;
@@ -104,6 +113,7 @@ public class BallController : MonoBehaviour
     void StopIfItsSlowDown()
     {
         //Debug.Log("moving");
+        // top durdu gibi gorunse de hala minik bir ivmeye sahip olabilir
         if (theRb.velocity.magnitude < stopVelocity)
         {
             theRb.velocity = Vector3.zero;
@@ -114,10 +124,9 @@ public class BallController : MonoBehaviour
 
             currentState = states.idle;
             //Debug.Log("moving den ýdle a gec");
-
-
         }
     }
+
     void AlignTargetPosBeforeShoot()
     {
         targetPoint = new Vector3(0f, transform.position.y -0.5f, z * lineLength);
@@ -125,28 +134,26 @@ public class BallController : MonoBehaviour
 
     void RotateTargetDirection()
     {
-        touchPos = Touchscreen.current.primaryTouch.position.ReadValue();
+        currentTouchPos = Touchscreen.current.primaryTouch.position.ReadValue();
         float deltaX;
-        deltaX = ((touchPos.x - firstTouchPos.x) / 3f);
-       // Debug.Log("deltax: " + deltaX);
+        deltaX = ((currentTouchPos.x - firstTouchPos.x) / 3f);
+        // Debug.Log("deltax: " + deltaX);
 
-        if (deltaX > deltaOfXs)
-        {
-            deltaOfXs = deltaX;
-            isClockWiseRotation = true;
-        }
-        else if (deltaX < deltaOfXs)
-        {
-            deltaOfXs = deltaX;
-            isClockWiseRotation = false;
-        }
-        else
-        {
-            //Debug.Log("rotatede bisey yapma return");
-            return;
-        }
+           if (deltaX > deltaOfXs)
+           {
+               isClockWiseRotation = true;
+           }
+           else if (deltaX < deltaOfXs)
+           {
+               isClockWiseRotation = false;
+           }
+           else
+           {
+               //Debug.Log("rotatede bisey yapma return");
+               return;
+           }
 
-
+        deltaOfXs = deltaX;
 
         if (isClockWiseRotation)
         {
