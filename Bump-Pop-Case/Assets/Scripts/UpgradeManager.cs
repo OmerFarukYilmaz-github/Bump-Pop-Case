@@ -31,17 +31,21 @@ public class UpgradeManager : MonoBehaviour
             return; 
         }
 
-        // maliyet her seferinde %20 artsýn ve uý duzenlensin
+        // maliyet her seferinde %40 artsýn ve uý duzenlensin
         float newIncomePerBallCost = Mathf.RoundToInt(System.Convert.ToInt32(incomeCostText.text) * 1.4f);
         DatabaseManager.instance.SetIncomeUpgradeCost(newIncomePerBallCost);
+
+        DatabaseManager.instance.AdjustMoney(DatabaseManager.instance.GetMoneyAmount() - Mathf.RoundToInt(System.Convert.ToInt32(incomeCostText.text)));
         incomeCostText.text = newIncomePerBallCost.ToString();
+
+
 
         // level 1 artsýn ve uý duzenlensin
         int upgradeLevel = System.Convert.ToInt32(incomeLevelText.text.Replace("LEVEL", ""));
         DatabaseManager.instance.SetIncomeLevelName("LEVEL " + (++upgradeLevel));
         incomeLevelText.text = "LEVEL " + upgradeLevel;
 
-        // top basýna geliri 1.5 kat arttýr
+        // top basýna geliri 2 kat arttýr
         DatabaseManager.instance.SetIncomePerBall(DatabaseManager.instance.GetIncomePerBall() * 2f);
 
     }
@@ -53,9 +57,11 @@ public class UpgradeManager : MonoBehaviour
         { return; }
       
 
-        // maliyet her seferinde %20 artsýn ve uý duzenlensin
-        float newBallCloneCountCost = Mathf.RoundToInt(System.Convert.ToInt32(ballCloneCountCostText.text) * 1.4f);
-        DatabaseManager.instance.SetBall2CloneUpgradeCost(newBallCloneCountCost);
+        // maliyet her seferinde %40 artsýn ve uý duzenlensin
+        int newBallCloneCountCost = Mathf.RoundToInt(System.Convert.ToInt32(ballCloneCountCostText.text) * 1.4f);
+        DatabaseManager.instance.SetBall2CloneUpgradeCost(newBallCloneCountCost); 
+        DatabaseManager.instance.AdjustMoney(DatabaseManager.instance.GetMoneyAmount() - Mathf.RoundToInt(System.Convert.ToInt32(ballCloneCountCostText**.text)));
+
         ballCloneCountCostText.text = newBallCloneCountCost.ToString();
 
         // level 1 artsýn ve uý duzenlensin

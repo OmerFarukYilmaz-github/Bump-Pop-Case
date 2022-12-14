@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -54,7 +53,7 @@ public class BallController : MonoBehaviour
 
         CheckForFirstTouch();
 
-        if (Touchscreen.current.press.isPressed && currentState == states.idle && !isFirstTouch)
+        if (Touchscreen.current.press.isPressed && currentState == states.idle && !isFirstTouch && uiManager.IsGameAreaTouched() )
         {
             currentState = states.aiming;
             //Debug.Log("idle dan aiming e gec");
@@ -87,7 +86,7 @@ public class BallController : MonoBehaviour
     {
         // ilk dokunulan noktayý al. sonra dokunulan noktayla ilk nokta arasýndaki farka göre
         // lineRenderer donecek
-        if (Touchscreen.current.press.isPressed && isFirstTouch)
+        if (Touchscreen.current.press.isPressed && isFirstTouch && uiManager.IsGameAreaTouched())
         {
             isFirstTouch = false;
             firstTouchPos = Touchscreen.current.primaryTouch.position.ReadValue();

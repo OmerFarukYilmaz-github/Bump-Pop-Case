@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
 
 public class GameOver : MonoBehaviour
 {
@@ -13,6 +12,7 @@ public class GameOver : MonoBehaviour
     public bool isGameOver;
 
     UIManager uiManager;
+
     public void Start()
     {
         uiManager = FindObjectOfType<UIManager>();

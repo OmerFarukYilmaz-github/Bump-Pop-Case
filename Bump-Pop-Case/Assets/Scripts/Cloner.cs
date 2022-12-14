@@ -11,6 +11,7 @@ public class Cloner : MonoBehaviour
     {
         uiManager = FindObjectOfType<UIManager>();
     }
+
     public void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Ball")

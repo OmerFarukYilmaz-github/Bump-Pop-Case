@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine;  
 using TMPro;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
@@ -34,11 +33,12 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (Touchscreen.current.press.isPressed && preGameUI.activeSelf == true && IsGameAreaTouched())
         {
             SetVisibilityOfUI(false, true);
         }
+
+        moneyTxt.text = DatabaseManager.instance.GetMoneyAmount().ToString();
     }
 
     void SetVisibilityOfUI(bool isPreGameUIVisibile, bool isrestartButtonVisibile)
@@ -51,7 +51,7 @@ public class UIManager : MonoBehaviour
     {
         if (EventSystem.current.currentSelectedGameObject != null && EventSystem.current.currentSelectedGameObject.GetComponent<CanvasRenderer>() != null)
         {
-           // Debug.Log("touch over GUI element!");
+            //Debug.Log("touch over GUI element!");
             return false;
         }
         else
@@ -62,6 +62,7 @@ public class UIManager : MonoBehaviour
     }
 
     public void AdjustMoney(float money)
+
     {
         _money += money;
         moneyTxt.text = _money.ToString("n2");

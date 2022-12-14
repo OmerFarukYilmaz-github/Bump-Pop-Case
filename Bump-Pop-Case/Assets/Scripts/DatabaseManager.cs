@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DatabaseManager : MonoBehaviour
 {
+    #region keys
     public static DatabaseManager instance;
 
     const string LEVEL_NAME_KEY = "level_name";
@@ -16,7 +17,7 @@ public class DatabaseManager : MonoBehaviour
 
     const string BALL_COUNT_TO_CLON_LEVEL_KEY = "ball_count_to_clon_level";
     const string BALL_COUNT_TO_CLON_UPGRADE_COST_KEY = "ball_count_to_clon_upgrade_Cost";
-
+    #endregion
 
     public void Awake()
     {
@@ -51,7 +52,7 @@ public class DatabaseManager : MonoBehaviour
     }
     public float GetMoneyAmount()
     {
-        return PlayerPrefs.GetFloat(MONEY_KEY, 100f);
+        return PlayerPrefs.GetFloat(MONEY_KEY, 210f);
     }
 
 

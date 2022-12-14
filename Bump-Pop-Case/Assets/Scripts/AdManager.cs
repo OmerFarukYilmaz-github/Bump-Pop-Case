@@ -34,6 +34,7 @@ public class AdManager : MonoBehaviour, IUnityAdsListener
             Advertisement.Initialize(gameId, isTestMode);
         }
     }
+
     public void Start()
     {
         gameOver = FindObjectOfType<GameOver>();
